@@ -138,14 +138,9 @@
     },
     "remix-ui-tabs": {
       "tags": []
+    },
+    "remix-ui-theme-module": {
+      "tags": []
     }
-  },
-  "targetDependencies": {
-    "build": [
-      {
-        "target": "build",
-        "projects": "dependencies"
-      }
-    ]
   }
 }
