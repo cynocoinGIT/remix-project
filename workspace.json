@@ -1023,6 +1023,21 @@
         }
       }
     },
+    "remix-ui-theme-module": {
+      "root": "libs/remix-ui/theme-module",
+      "sourceRoot": "libs/remix-ui/theme-module/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+              "tsConfig": ["libs/remix-ui/editor/tsconfig.lib.json"],
+              "exclude": ["**/node_modules/**", "!libs/remix-ui/editor/**/*"]
+          }
+        }
+      }
+    },
     "remix-ui-helper": {
       "root": "libs/remix-ui/helper",
       "sourceRoot": "libs/remix-ui/helper/src",
@@ -1066,21 +1081,6 @@
             "tsConfig": ["libs/remix-ui/vertical-icons-panel/tsconfig.lib.json"],
             "exclude": ["**/node_modules/**", "!libs/remix-ui/vertical-icons-panel/**/*"]
           }
-        }
-      }
-    }
-  },
-  "remix-ui-theme-module": {
-    "root": "libs/remix-ui/theme-module",
-    "sourceRoot": "libs/remix-ui/theme-module/src",
-    "projectType": "library",
-    "architect": {
-      "lint": {
-        "builder": "@nrwl/linter:lint",
-        "options": {
-          "linter": "eslint",
-          "tsConfig": ["libs/remix-ui/vertical-icons-panel/tsconfig.lib.json"],
-          "exclude": ["**/node_modules/**", "!libs/remix-ui/vertical-icons-panel/**/*"]
         }
       }
     }
