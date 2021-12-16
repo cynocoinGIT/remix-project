@@ -68,8 +68,17 @@ export const Renderer = ({ message, opt = {}, plugin }: RendererProps) => {
     return result
   }
 
+  const getAppParameter = (name) => {
+    // first look in the URL params then in the local storage
+    const params = plugin.queryParams.get()
+    const param = params[name] ? params[name] : plugin.config.get(name)
+    if (param === 'true') return true
+    if (param === 'false') return false
+    return param
+  }
+
   const addAnnotation = (file, error) => {
-    if (file === plugin.getAppParameter('currentFile')) {
+    if (file === getAppParameter('currentFile')) {
       plugin.call('editor', 'addAnnotation', error, file)
     }
   }
@@ -87,9 +96,9 @@ export const Renderer = ({ message, opt = {}, plugin }: RendererProps) => {
   }
 
   const _errorClick = async (errFile, errLine, errCol) => {
-    if (errFile !== plugin.getAppParameter('currentFile')) {
+    if (errFile !== getAppParameter('currentFile')) {
       // TODO: refactor with this._components.contextView.jumpTo
-      if (await plugin.fileExists(errFile)) {
+      if (await plugin.call('fileManager', 'exists', errFile)) {
         plugin.open(errFile)
         plugin.call('editor', 'gotoLine', errLine, errCol)
       }
