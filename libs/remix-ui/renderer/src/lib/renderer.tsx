@@ -103,7 +103,7 @@ export const Renderer = ({ message, opt = {}, plugin }: RendererProps) => {
     if (errFile !== getAppParameter('currentFile')) {
       // TODO: refactor with this._components.contextView.jumpTo
       if (await plugin.call('fileManager', 'exists', errFile)) {
-        plugin.open(errFile)
+        plugin.call('fileManager', 'open', errFile)
         plugin.call('editor', 'gotoLine', errLine, errCol)
       }
     } else {
