@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react' //eslint-disable-line
+import QueryParams from '../../../../../apps/remix-ide/src/lib/query-params'
+const registry = require('../../../../../apps/remix-ide/src/global/registry')
 import './renderer.css'
 interface RendererProps {
   message: any;
@@ -70,8 +72,10 @@ export const Renderer = ({ message, opt = {}, plugin }: RendererProps) => {
 
   const getAppParameter = (name) => {
     // first look in the URL params then in the local storage
-    const params = plugin.queryParams.get()
-    const param = params[name] ? params[name] : plugin.config.get(name)
+    const queryParams = new QueryParams()
+    const config = registry.get('config').api
+    const params = queryParams.get()
+    const param = params[name] ? params[name] : config.get(name)
     if (param === 'true') return true
     if (param === 'false') return false
     return param
